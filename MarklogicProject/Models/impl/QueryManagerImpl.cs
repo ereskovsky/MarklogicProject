@@ -52,6 +52,24 @@ namespace MarkLogic.impl
 			}
 		}
 
+        public string SearchJson(string query, long start = 1, long pageLength = 10, string format = "json")
+        {
+            string result = "";
+            string url = SetURL(query, start, pageLength, format);
+            Uri requestUri = new Uri(url);
+            HttpResponseMessage response = GetRESTClient().GetAsync(requestUri).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                result = response.Content.ReadAsStringAsync().Result;
+                return result;
+            }
+            else
+            {
+                result = string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                return result;
+            }
+
+        }
 		// Search MarkLogic and return the results as a SearchResult object
 		public SearchResult Search(string query, long start = 1, long pageLength = 10, string format = "xml")
 		{

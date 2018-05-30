@@ -89,22 +89,22 @@ namespace MarklogicProject.Controllers
 
             // Search results are retuned in a SearchResult object.
             // 
-            MarkLogic.REST.SearchResult searchResult = mgr.Search(query);
+            var searchResult = mgr.SearchJson(query);
 
 
-            List<ResultOutput> list = new List<ResultOutput>();
-            // Each search result is returned in a MatchDocSummary object.
-            //  GetMatchResults() returns a list of these, if any.
-            foreach (MatchDocSummary result in searchResult.GetMatchResults())
-            {
-                list.Add(new ResultOutput { Result = "---Result " + result.GetIndex() + "---------", Uri = result.GetUri(), Mime = result.GetMimetype(), Relevance = result.GetScore(), Text = result.GetFirstSnippetText() });
-            }
-            ViewBag.Result = list;
-            ViewBag.SearchRes = searchResult.ToString();
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(searchResult.ToString());
-            string jsonText = JsonConvert.SerializeXmlNode(doc);
-            var resp = JsonConvert.DeserializeObject<Response>(jsonText);
+            //List<ResultOutput> list = new List<ResultOutput>();
+            //// Each search result is returned in a MatchDocSummary object.
+            ////  GetMatchResults() returns a list of these, if any.
+            //foreach (MatchDocSummary result in searchResult.GetMatchResults())
+            //{
+            //    list.Add(new ResultOutput { Result = "---Result " + result.GetIndex() + "---------", Uri = result.GetUri(), Mime = result.GetMimetype(), Relevance = result.GetScore(), Text = result.GetFirstSnippetText() });
+            //}
+            //ViewBag.Result = list;
+            //ViewBag.SearchRes = searchResult.ToString();
+            //XmlDocument doc = new XmlDocument();
+            //doc.LoadXml(searchResult.ToString());
+            //string jsonText = JsonConvert.SerializeXmlNode(doc);
+            var resp = JsonConvert.DeserializeObject<SearchResponse>(searchResult);
              ViewBag.Response = resp;
             
             

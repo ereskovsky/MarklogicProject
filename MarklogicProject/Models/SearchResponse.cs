@@ -7,77 +7,70 @@ using Newtonsoft.Json;
 
 namespace MarklogicProject.Models
 {
-    public class Response{
-        [JsonProperty("search:response")]
-        public SearchResponse Resp { get; set; }
-    }
+    
     public class SearchResponse
     {
-        [JsonProperty("@xmlns:search")]
-        public string XMLNS { get; set; }
-        [JsonProperty("@snippet-format")]
+        
+        [JsonProperty("snippet-format")]
         public string SnippetFormat { get; set; }
-        [JsonProperty("@total")]
+        [JsonProperty("total")]
         public string Total { get; set; }
-        [JsonProperty("@start")]
+        [JsonProperty("start")]
         public string Start { get; set; }
-        [JsonProperty("@page-length")]
+        [JsonProperty("page-length")]
         public string PageLength { get; set; }
-        [JsonProperty("search:result")]
-        public SearchResult SearchResult { get; set; }
-        [JsonProperty("search:qtext")]
+        [JsonProperty("results")]
+        public List<SearchResult> SearchResult { get; set; }
+        [JsonProperty("qtext")]
         public string QueryText { get; set; }
-        [JsonProperty("search:metrics")]
+        [JsonProperty("metrics")]
         public SearchMetrics SearchMetrics { get; set; }
 
 
     }
     public class SearchResult
     {
-        [JsonProperty("@index")]
+        [JsonProperty("index")]
         public int Index { get; set; }
-        [JsonProperty("@uri")]
+        [JsonProperty("uri")]
         public string Uri { get; set; }
-        [JsonProperty("@path")]
+        [JsonProperty("path")]
         public string Path { get; set; }
-        [JsonProperty("@score")]
+        [JsonProperty("score")]
         public int Score { get; set; }
-        [JsonProperty("@confidence")]
+        [JsonProperty("confidence")]
         public double Confidence { get; set; }
-        [JsonProperty("@fitness")]
+        [JsonProperty("fitness")]
         public double Fitness { get; set; }
-        [JsonProperty("@href")]
+        [JsonProperty("href")]
         public string Href { get; set; }
-        [JsonProperty("@mimetype")]
+        [JsonProperty("mimetype")]
         public string MimeType { get; set; }
-        [JsonProperty("@format")]
+        [JsonProperty("format")]
         public string Format { get; set; }
-        [JsonProperty("search:snippet")]
-        public SearchSnippet Snippet { get; set; }
-
-    }
-    public class SearchSnippet
-    {
-        [JsonProperty("search:match")]
+        [JsonProperty("matches")]
         public List<SearchMatch> Matches { get; set; }
+
     }
     public class SearchMatch
     {
-        [JsonProperty("@path")]
+        [JsonProperty("path")]
         public string Path { get; set; }
-        [JsonProperty("#text")]
-        public List<string> Total { get; set; }
-        [JsonProperty("search:highlighted")]
-        public string Highlighted { get; set; }
+        [JsonProperty("match-text")]
+        public object MatchText { get; set; }
 
     }
+    //public class MatchText{
+
+
+    //}
     public class SearchMetrics
     {
-        [JsonProperty("search:query-resolution-time")]
+        [JsonProperty("query-resolution-time")]
         public string QueryResolutionTime { get; set; }
-        [JsonProperty("search:snippet-resolution-time")]
+        [JsonProperty("snippet-resolution-time")]
         public string SnippetResolutionTime { get; set; }
-        [JsonProperty("search:total-time")]
+        [JsonProperty("total-time")]
         public string TotalTime { get; set; }
     }
 }

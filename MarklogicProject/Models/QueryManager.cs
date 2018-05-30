@@ -14,6 +14,7 @@ namespace MarkLogic.REST
         void SetConnection(HttpClient _client, string _host, string _port);
         string SearchRaw(string query, long start = 1, long pageLength = 10, string format = "xml");
         SearchResult Search(string query, long start = 1, long pageLength = 10, string format = "xml");
+        string SearchJson(string query, long start = 1, long pageLength = 10, string format = "json");
         Task<string> SearchRawAsync(string query, long start = 1, long pageLength = 10, string format = "xml");
     }
 

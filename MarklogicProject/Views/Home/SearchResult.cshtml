@@ -9,11 +9,18 @@
 <div style="margin-top: 100px; margin-bottom:100px;">Результаты ввода:</div>
 
 
-@foreach (var item in ViewBag.Response.SearchResult.Snippet.Matches)
+@foreach (var item in ViewBag.Response.SearchResult)
 {
-    <div style="margin-top:10px">@item.Path</div>
-    <div style="margin-top:10px">@item.Total[1]</div>
-    <div style="margin-top:10px">@item.Highlighted</div>
-    <hr />
+    foreach (var i in item.Matches)
+    {
+        <div style="margin-top:10px"><a href="http://ec2-18-184-154-255.eu-central-1.compute.amazonaws.com:8000/@item.Href.Substring(1)">@item.Href</a></div>
+        <div style="margin-top:10px">@i.Path</div>
+        <div style="margin-top:10px">
+            @foreach (var t in @i.MatchText)
+            {
+                <span> @t.Value</span>
+            }
+        </div>
+        <hr />}
 }
 
