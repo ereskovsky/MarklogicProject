@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div style="margin-top: 100px; margin-bottom:100px;">Результаты ввода:</div>
+
+
+@foreach (var item in ViewBag.Response.SearchResult.Snippet.Matches)
+{
+    <div style="margin-top:10px">@item.Path</div>
+    <div style="margin-top:10px">@item.Total[1]</div>
+    <div style="margin-top:10px">@item.Highlighted</div>
+    <hr />
+}
+

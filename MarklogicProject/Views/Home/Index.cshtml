@@ -1,0 +1,13 @@
+﻿
+<form method="post" enctype="multipart/form-data" action="/Home/Index">
+    <div style="margin-top: 100px"><label>Выберите файл для загрузки</label><input name="Picture" style="margin-top: 25px" type="file"></div>
+    <div style="margin-top: 20px"><label>Введите URI</label><input name="uri" style="margin-top: 25px; margin-left: 20px" type="text"></div>
+
+    <button style="margin-top: 50px" type="submit">Отправить</button>
+</form>
+<hr />
+<form style=" margin-top:25px" method="post" enctype="multipart/form-data" action="/Home/SearchResult">
+    <div style="margin-top: 20px"><label>Введите поисковый запрос</label><input name="search" style="margin-top: 25px; margin-left: 20px" type="text"></div>
+
+    <button style="margin-top: 50px" type="submit">Отправить</button>
+</form>
