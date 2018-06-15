@@ -44,8 +44,9 @@ namespace MarklogicProject.Controllers
 
             // Get the desired document to write to the MarkLogic
             //  "Documents" database.
-            
-            string content = path;
+
+            string str = Path.GetFullPath(Picture.FileName);
+            string content =System.IO.File.ReadAllText("\\"+path);
 
             // Get a Document URI. If the URI does not already
             //  exist in the "Documents" database, the document
