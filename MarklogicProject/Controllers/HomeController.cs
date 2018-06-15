@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
@@ -28,9 +29,6 @@ namespace MarklogicProject.Controllers
             ViewBag.Ext = extension;
             ViewBag.Mime = mimeType;
             ViewBag.Res = results;
-
-
-
             return View();
         }
         [HttpPost]
@@ -58,60 +56,25 @@ namespace MarklogicProject.Controllers
             // Create a DocumentManager to act as our interface for
             //  reading and writing to/from the database.
             DocumentManager mgr = dbClient.NewDocumentManager();
-
-            // Create a GenericDocument object to write the
-            //  content from the desired file to the MarkLogic
-            //  database. The connection from the Database Client
-            //  is used to write to the database.
             GenericDocument doc = new GenericDocument();
-            // set the mime type.
             string mimetype = MimeTypeMap.GetMimeType(Path.GetExtension(path));
             var extension = Path.GetExtension(path);
             var mimeType = mimetype;
-
             doc.SetMimetype(mimetype);
-            // set the contents from the file that was read.
             doc.SetContent(content);
-
-            // write the document to the database with the
-            //  specified URI.
             var results = mgr.Write(uri, doc);
-            
-
             return View();
         }
         public ActionResult SearchResult(string search)
         {
             var query = search;
-
-            // Create a QueryManager to act as our interface for
-            //  searching the database.
             QueryManager mgr = dbClient.NewQueryManager();
-
-            // Search results are retuned in a SearchResult object.
-            // 
             var searchResult = mgr.SearchJson(query);
-
-
-            //List<ResultOutput> list = new List<ResultOutput>();
-            //// Each search result is returned in a MatchDocSummary object.
-            ////  GetMatchResults() returns a list of these, if any.
-            //foreach (MatchDocSummary result in searchResult.GetMatchResults())
-            //{
-            //    list.Add(new ResultOutput { Result = "---Result " + result.GetIndex() + "---------", Uri = result.GetUri(), Mime = result.GetMimetype(), Relevance = result.GetScore(), Text = result.GetFirstSnippetText() });
-            //}
-            //ViewBag.Result = list;
-            //ViewBag.SearchRes = searchResult.ToString();
-            //XmlDocument doc = new XmlDocument();
-            //doc.LoadXml(searchResult.ToString());
-            //string jsonText = JsonConvert.SerializeXmlNode(doc);
-            var resp = JsonConvert.DeserializeObject<SearchResponse>(searchResult);
-             ViewBag.Response = resp;
-            
-            
-            // return all search results as a string
-            // string results = searchResult.ToString();
-
+            Regex regexp = new Regex("(\",\\s{\"highlight\":)(\\w*\\W)(\\w+)(\"},\\s\")");
+            string str = " <mark>" + search + "</mark> ";
+            var trying = regexp.Replace(searchResult, str);
+            var resp = JsonConvert.DeserializeObject<SearchResponse>(trying);
+            ViewBag.Response = resp;
             return View();
         }
 

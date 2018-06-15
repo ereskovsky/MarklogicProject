@@ -13,7 +13,7 @@ namespace MarkLogic.impl
 
         string m_host;
         string m_port;
-        static readonly string m_cliientRestDocService = "/v1/documents"; //MarkLogic REST API service for document CRUD.
+        static readonly string m_cliientRestDocService = "/v1/modules"; //MarkLogic REST API service for document CRUD.
 
         public HttpClient GetRESTClient() { return m_httpClient; }
 

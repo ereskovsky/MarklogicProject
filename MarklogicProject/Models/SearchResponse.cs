@@ -50,6 +50,8 @@ namespace MarklogicProject.Models
         public string Format { get; set; }
         [JsonProperty("matches")]
         public List<SearchMatch> Matches { get; set; }
+        [JsonProperty("content")]
+        public string Content { get; set; }
 
     }
     public class SearchMatch
@@ -57,7 +59,7 @@ namespace MarklogicProject.Models
         [JsonProperty("path")]
         public string Path { get; set; }
         [JsonProperty("match-text")]
-        public object MatchText { get; set; }
+        public List<string> MatchText { get; set; }
 
     }
     //public class MatchText{

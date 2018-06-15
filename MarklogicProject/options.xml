@@ -1,0 +1,11 @@
+﻿<options xmlns="http://marklogic.com/appservices/search">
+  <search-option>unfiltered</search-option>
+  <quality-weight>0</quality-weight>
+  <return-facets>true</return-facets>
+  <return-results>true</return-results>
+  <transform-results apply="empty-snippet">
+    <preferred-matches>
+      <json-property>title</json-property>
+    </preferred-matches>
+  </transform-results>
+</options>
