@@ -70,10 +70,13 @@ namespace MarklogicProject.Controllers
             var query = search;
             QueryManager mgr = dbClient.NewQueryManager();
             var searchResult = mgr.SearchJson(query);
-            Regex regexp = new Regex("(\",\\s{\"highlight\":)(\\w*\\W)(\\w+)(\"},\\s\")");
+            Regex regexp = new Regex("((\",\\s{\"highlight\":)(\\w*\\W)(\\w+)(\"},\\s\"))");
+            Regex regexp2 = new Regex("(({\"highlight\":)(\\w*\\W)(\\w+)(\"}))");
             string str = " <mark>" + search + "</mark> ";
+            string str2 = " \"<mark>" + search + "</mark>\" ";
             var trying = regexp.Replace(searchResult, str);
-            var resp = JsonConvert.DeserializeObject<SearchResponse>(trying);
+            var trying2 = regexp2.Replace(trying, str2);
+            var resp = JsonConvert.DeserializeObject<SearchResponse>(trying2);
             ViewBag.Response = resp;
             return View();
         }
