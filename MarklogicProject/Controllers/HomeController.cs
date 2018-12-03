@@ -44,7 +44,7 @@ namespace MarklogicProject.Controllers
             //  "Documents" database.
 
             string str = Path.GetFullPath(Picture.FileName);
-            string content =System.IO.File.ReadAllText("\\"+path);
+            string content  =System.IO.File.ReadAllText("C:\\Users\\Антон Ересковский\\Downloads\\2_kurs.xml");
 
             // Get a Document URI. If the URI does not already
             //  exist in the "Documents" database, the document
