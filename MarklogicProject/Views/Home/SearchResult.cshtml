@@ -1,28 +1,28 @@
 ﻿
 @{
+
     ViewBag.Title = "Result";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 
-<div style="margin-top: 100px; margin-bottom:100px;">Результаты ввода по запросу <span>@ViewBag.Response.QueryText</span>:</div>
+<h2 style="margin-top: 100px; margin-bottom:100px;">Результаты ввода по запросу <span>@ViewBag.Response.QueryText</span>:</h2>
 
 
 @foreach (var item in ViewBag.Response.SearchResult)
 {
-    <div style="margin-bottom:50px">
-        <div style="margin-top:10px;">Результат: @item.Score</div>
-        <div style="margin-top:10px;">Уверенность: @item.Confidence</div>
-        <div style="margin-top:10px;">Соответствие @item.Fitness</div>
-    </div>
-    foreach (var i in item.Matches)
-    {
-        <div style="margin-top:10px"><a href="http://ec2-18-184-154-255.eu-central-1.compute.amazonaws.com:8000/@item.Href.Substring(1)">@item.Href</a></div>
-        <div style="margin-top:10px">@i.Path</div>
-        <div style="margin-top:10px">@Html.Raw(i.MatchText[0])</div>
-
-    }
+    <h3>@item.Path</h3>
+    <ul>
+        @foreach (var i in item.Matches)
+        {
+            <li>
+                <div style="margin-top:10px">@i.Path</div>
+                <b style="margin-top:10px">@Html.Raw(i.MatchText[0])</b>
+            </li>
+            <hr />
+        }
+    </ul>
     <hr />
 }
 

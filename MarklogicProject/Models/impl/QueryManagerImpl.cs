@@ -115,7 +115,7 @@ namespace MarkLogic.impl
 
 		private string SetURL(string query, long start = 1, long pageLength = 10, string format = "xml")
 		{
-			string url = string.Format("http://{0}:{1}{2}?q={3}&start={4}&pageLength={5}&format={6}&options=myoptions",
+			string url = string.Format("http://{0}:{1}{2}?q={3}&start={4}&pageLength={5}&format={6}",
 									   m_host, m_port, m_clientRestDocService,
 									   query, start, pageLength, format);
 			return url;

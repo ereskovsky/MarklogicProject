@@ -34,7 +34,9 @@ namespace MarkLogic.REST
 		{
 			if (_host == null)
 			{
-				throw new System.ArgumentException("host parameter cannot be null", _host);
+                
+
+                throw new System.ArgumentException("host parameter cannot be null", _host);
 			}
 			else if (_port == null)
 			{
